@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BILL_SOLID_V3 – PremiumStable‑H1 | Bill Responde (AA en español)</title>
+  <meta name="description" content="Bill Responde: tu guía de bolsillo inspirada en la literatura de AA. Hazte Premium para preguntas ilimitadas, biblioteca completa, programas de 4 semanas y más." />
+  <meta name="theme-color" content="#0F172A" />
+  <meta property="og:title" content="Bill Responde – Premium en 1 clic" />
+  <meta property="og:description" content="Apoyo educativo basado en literatura de AA. Preguntas ilimitadas, biblioteca premium, programas de 4 semanas. México y comunidad hispana." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bill-ai-javt2bill.streamlit.app" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1400&auto=format&fit=crop" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;           /* fondo oscuro elegante */
+      --card:#111827;         /* slate-900 */
+      --muted:#94a3b8;        /* slate-400 */
+      --text:#e5e7eb;         /* gray-200 */
+      --accent:#22c55e;       /* green-500 */
+      --accent-2:#06b6d4;     /* cyan-500 */
+      --danger:#ef4444;       /* red-500 */
+      --ring:rgba(34,197,94,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b1220,#0b1220 50%,#0f172a);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.8);backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid rgba(148,163,184,.15)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:40px;height:40px;border-radius:12px;background: radial-gradient(120% 120% at 20% 10%, #22c55e 0%, #06b6d4 45%, #0ea5e9 70%, #0b1220 100%);box-shadow:0 0 0 3px rgba(255,255,255,.05)}
+    .brand h1{font-size:18px;letter-spacing:.2px;margin:0}
+    .ribbon{font-size:12px;color:var(--muted)}
+    .cta{display:flex;align-items:center;gap:10px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:14px;border:1px solid transparent;font-weight:700;letter-spacing:.2px;cursor:pointer;transition:.2s ease;}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:linear-gradient(180deg,#22c55e,#16a34a);color:#08130b;box-shadow:0 10px 30px var(--ring)}
+    .btn-outline{border-color:rgba(148,163,184,.3);color:#e5e7eb;background:transparent}
+    .btn-outline:hover{border-color:rgba(148,163,184,.6)}
+
+    .hero{padding:64px 0;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+    .kicker{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid rgba(148,163,184,.25);color:var(--muted);font-weight:600;font-size:12px;letter-spacing:.4px;margin-bottom:14px}
+    h2.title{font-size:44px;line-height:1.05;margin:0 0 14px}
+    .subtitle{font-size:18px;color:#cbd5e1;max-width:680px}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 26px}
+    .badge{font-size:13px;color:#0a1310;background:linear-gradient(180deg,#a7f3d0,#6ee7b7);padding:8px 12px;border-radius:999px;border:1px solid rgba(34,197,94,.35)}
+    .hero-media{position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(148,163,184,.15);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+    .hero-media img{display:block;width:100%;height:auto}
+    .trust{margin-top:12px;color:var(--muted);font-size:12px}
+
+    .section{padding:56px 0}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:linear-gradient(180deg,#0f172a,#0b1220);border:1px solid rgba(148,163,184,.15);border-radius:18px;padding:22px}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .card p{margin:0;color:#cbd5e1;font-size:14px}
+
+    .programas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .programa{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(148,163,184,.12);cursor:pointer}
+    .programa img{width:100%;height:180px;object-fit:cover;display:block;filter:saturate(1.05)}
+    .programa .p-label{position:absolute;inset:auto 12px 12px 12px;background:rgba(2,6,23,.65);backdrop-filter:blur(6px);padding:10px 12px;border-radius:12px;border:1px solid rgba(148,163,184,.25);font-weight:700}
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+    .pricing{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .plan{background:linear-gradient(180deg,#0f172a,#0b1220);border:1px solid rgba(148,163,184,.15);border-radius:18px;padding:24px;position:relative}
+    .plan h3{margin:0 0 8px}
+    .price{font-size:36px;font-weight:800;margin:8px 0 16px}
+    .features{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+    .features li{display:flex;gap:8px;align-items:flex-start}
+    .check{width:20px;height:20px;border-radius:6px;background:radial-gradient(120% 120% at 20% 10%, #22c55e 0%, #10b981 60%, #0b1220 100%);display:inline-block;margin-top:2px}
+    .muted{color:var(--muted)}
+
+    .testis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .testi{background:linear-gradient(180deg,#0f172a,#0b1220);border:1px solid rgba(148,163,184,.15);border-radius:18px;padding:20px}
+    .testi .who{margin-top:10px;color:#cbd5e1;font-size:14px}
+
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    details{background:#0f172a;border:1px solid rgba(148,163,184,.15);border-radius:14px;padding:14px}
+    summary{cursor:pointer;font-weight:700}
+
+    footer{padding:36px 0;color:#94a3b8;border-top:1px solid rgba(148,163,184,.15)}
+
+    .sticky-cta{position:fixed;bottom:12px;left:12px;right:12px;z-index:60;background:linear-gradient(180deg,#0f172a,#0b1220);border:1px solid rgba(148,163,184,.25);border-radius:16px;padding:12px;display:flex;gap:12px;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .sticky-cta .btn{padding:12px 16px}
+
+    @media (max-width: 1024px){
+      .hero{grid-template-columns:1fr;}
+      .cards{grid-template-columns:1fr 1fr}
+      .programas{grid-template-columns:1fr 1fr}
+      .grid-2{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .testis{grid-template-columns:1fr}
+      .faq{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>BILL_SOLID_V3 – PremiumStable‑H1</h1>
+          <div class="ribbon">Hecho con respeto a la 12ª Tradición: anonimato primero</div>
+        </div>
+      </div>
+      <div class="cta">
+        <a class="btn btn-outline" href="https://bill-ai-javt2bill.streamlit.app" target="_blank" rel="nofollow noopener">Probar gratis</a>
+        <!-- REEMPLAZA el href con tu Payment Link de Stripe (suscripción) -->
+        <a class="btn btn-primary" id="cta-top" href="https://bill-ai-javt2bill.streamlit.app/?checkout=1" target="_blank" rel="nofollow noopener">Hacerme Premium</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <span class="kicker">App educativa para la comunidad de AA en español</span>
+        <h2 class="title">Tu guía de bolsillo inspirada en la literatura de AA.<br>Premium en <i>un</i> clic.</h2>
+        <p class="subtitle">Hazte Premium y desbloquea <b>programas guiados de 4 semanas</b> con <b>micro‑planes diarios de 15 minutos</b>, <b>progreso guardado</b> y <b>recordatorios opcionales</b>. Menos teoría pesada; más práctica simple y constante. Además: <b>preguntas ilimitadas</b>, <b>Biblioteca/Audioteca/Videoteca</b> y <b>PDF de regalo</b>. Diseñado para México y la comunidad hispana.</p>
+        <div class="badges">
+          <span class="badge">Anonimato y confidencialidad</span>
+          <span class="badge">Sin anuncios</span>
+          <span class="badge">Cancela cuando quieras</span>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://bill-ai-javt2bill.streamlit.app/?checkout=1" target="_blank" rel="nofollow noopener">Hacerme Premium</a>
+          <a class="btn btn-outline" href="https://bill-ai-javt2bill.streamlit.app" target="_blank" rel="nofollow noopener">Entrar a la app</a>
+        </div>
+        <div class="trust">* No sustituye terapia, tratamiento médico ni a tu grupo. Apoyo educativo basado en literatura de AA.</div>
+      </div>
+      <div class="hero-media">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop" alt="Personas conectando en apoyo mutuo" />
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="cards">
+        <div class="card">
+          <h3>Preguntas ilimitadas</h3>
+          <p>Habla con "Bill" sin límites y obtén respuestas guiadas por literatura. Ideal para profundizar diariamente.</p>
+        </div>
+        <div class="card">
+          <h3>Biblioteca Premium</h3>
+          <p>Consulta la biblioteca completa (PDF), audioguías y videos exclusivos para miembros Premium.</p>
+        </div>
+        <div class="card">
+          <h3>Programas de 4 semanas</h3>
+          <p>Recibe cada día: 1) <b>Lectura breve</b>, 2) <b>Práctica sencilla</b>, 3) <b>Reflexión</b> con 1–2 preguntas, 4) <b>Micro‑acción</b>. Todo queda guardado; retomas donde te quedaste.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="grid-2">
+        <div class="card">
+          <h3>Por qué hacerte Premium hoy</h3>
+          <ul class="features">
+            <li><span class="check"></span> <b>Programas guiados 4 semanas</b>: pasos diarios claros con progreso guardado.</li>
+            <li><span class="check"></span> <b>Micro‑planes de 15 min</b> para crear hábito sin abrumarte.</li>
+            <li><span class="check"></span> <b>Recordatorios opcionales</b> para mantener la constancia.</li>
+            <li><span class="check"></span> Respuestas basadas en fragmentos de literatura (con fuentes).</li>
+            <li><span class="check"></span> Sin anuncios. Experiencia limpia y rápida en celular.</li>
+            <li><span class="check"></span> Cancela cuando quieras + <b>PDF de regalo</b> al suscribirte.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>¿Cómo funciona?</h3>
+          <ol class="features">
+            <li><span class="check"></span> Da clic en <b>Hacerme Premium</b> y completa el pago seguro (Stripe / PayPal).</li>
+            <li><span class="check"></span> Vuelve a la app: tu acceso Premium se activa en segundos.</li>
+            <li><span class="check"></span> Explora la Biblioteca y comienza un programa de 4 semanas.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h3 style="margin:0 0 14px">Programas de 4 semanas</h3>
+      <div class="programas">
+        <a class="programa" href="https://bill-ai-javt2bill.streamlit.app/?programa=estres" target="_blank" rel="nofollow noopener">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200&auto=format&fit=crop" alt="Programa: Estrés" />
+          <span class="p-label">Estrés • Programa 4 semanas</span>
+        </a>
+        <a class="programa" href="https://bill-ai-javt2bill.streamlit.app/?programa=ansiedad" target="_blank" rel="nofollow noopener">
+          <img src="https://images.unsplash.com/photo-1491349174775-aaafddd81942?q=80&w=1200&auto=format&fit=crop" alt="Programa: Ansiedad" />
+          <span class="p-label">Ansiedad • Programa 4 semanas</span>
+        </a>
+        <a class="programa" href="https://bill-ai-javt2bill.streamlit.app/?programa=miedo" target="_blank" rel="nofollow noopener">
+          <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1200&auto=format&fit=crop" alt="Programa: Miedo" />
+          <span class="p-label">Miedo • Programa 4 semanas</span>
+        </a>
+        <a class="programa" href="https://bill-ai-javt2bill.streamlit.app/?programa=sueno" target="_blank" rel="nofollow noopener">
+          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Programa: Sueño" />
+          <span class="p-label">Sueño • Programa 4 semanas</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="grid-2">
+        <div class="card">
+          <h3>¿Cómo es un día dentro del programa? (≈15 min)</h3>
+          <ol class="features">
+            <li><span class="check"></span> <b>Aterriza</b> (2 min): respiración o centrado.</li>
+            <li><span class="check"></span> <b>Lee</b> (3–5 min): fragmento breve inspirado en literatura de AA.</li>
+            <li><span class="check"></span> <b>Practica</b> (5 min): ejercicio simple (mente, cuerpo o acción).</li>
+            <li><span class="check"></span> <b>Reflexiona</b> (3 min): 1–2 preguntas guía.</li>
+            <li><span class="check"></span> <b>Micro‑acción</b> (2 min): lleva una idea a tu día.</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>Beneficios que puedes notar</h3>
+          <ul class="features">
+            <li><span class="check"></span> Menos <b>estrés</b> y <b>ansiedad</b> por tener pasos claros.</li>
+            <li><span class="check"></span> Más <b>claridad mental</b> y <b>hábitos</b> sostenibles.</li>
+            <li><span class="check"></span> <b>Sueño</b> más reparador con higiene sencilla.</li>
+            <li><span class="check"></span> Sentirte <b>acompañado</b> sin perder tu anonimato.</li>
+            <li><span class="check"></span> Progreso visible: retomas donde te quedaste.</li>
+          </ul>
+          <div class="cta" style="margin-top:12px">
+            <a class="btn btn-primary" href="https://bill-ai-javt2bill.streamlit.app/?programa=estres" target="_blank" rel="nofollow noopener">Empezar ahora: Programa Estrés</a>
+          </div>
+          <div class="muted" style="margin-top:8px">Apoyo educativo; no sustituye terapia ni tratamiento.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h3 style="margin:0 0 14px">Comparativa</h3>
+      <div class="pricing">
+        <div class="plan">
+          <h3>Plan Básico (gratis)</h3>
+          <div class="muted">Ideal para probar</div>
+          <div class="price">$0</div>
+          <ul class="features">
+            <li><span class="check"></span> Hasta 10 preguntas/mes</li>
+            <li><span class="check"></span> Vista previa de Biblioteca</li>
+            <li><span class="check"></span> Programas bloqueados</li>
+          </ul>
+          <div style="margin-top:16px" class="cta"><a class="btn btn-outline" href="https://bill-ai-javt2bill.streamlit.app" target="_blank" rel="nofollow noopener">Probar gratis</a></div>
+        </div>
+        <div class="plan" style="border-color:rgba(34,197,94,.5);box-shadow:0 0 0 2px rgba(34,197,94,.15) inset">
+          <h3>Premium (suscripción)</h3>
+          <div class="muted">Todo desbloqueado</div>
+          <div class="price">MXN $<span id="precio">—</span>/mes</div>
+          <ul class="features">
+            <li><span class="check"></span> Preguntas ilimitadas</li>
+            <li><span class="check"></span> Biblioteca / Audioteca / Videoteca</li>
+            <li><span class="check"></span> <b>Programas 4 semanas</b> con seguimiento diario y reinicios ilimitados</li>
+            <li><span class="check"></span> <b>Micro‑planes de 15 min</b> + recordatorios opcionales</li>
+            <li><span class="check"></span> PDF de regalo al suscribirte</li>
+            <li><span class="check"></span> Soporte prioritario</li>
+          </ul>
+          <div style="margin-top:16px" class="cta"><a class="btn btn-primary" href="https://bill-ai-javt2bill.streamlit.app/?checkout=1" target="_blank" rel="nofollow noopener">Hacerme Premium</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h3 style="margin:0 0 14px">Lo que dicen quienes ya lo usan</h3>
+      <div class="testis">
+        <div class="testi">
+          “Me ayudó a entender mejor la literatura y a prepararme para mi tribuna. Premium valió cada peso.”
+          <div class="who">— Valeria G., CDMX</div>
+        </div>
+        <div class="testi">
+          “Los programas de 4 semanas me dieron estructura diaria. En 10 días mi ansiedad bajó y dormí mejor.”
+          <div class="who">— Jorge T., Guadalajara</div>
+        </div>
+        <div class="testi">
+          “Aprecio mucho el respeto al anonimato y que no es terapia; es guía basada en textos. Muy útil.”
+          <div class="who">— Mónica R., Monterrey</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h3 style="margin:0 0 14px">Preguntas frecuentes</h3>
+      <div class="faq">
+        <details>
+          <summary>¿Esto es AA oficial o reemplaza un padrino/grupo?</summary>
+          <p>No. Es un apoyo educativo inspirado en literatura de AA. No reemplaza terapia, tratamiento, padrino ni grupo. Te animamos a asistir a tu grupo local.</p>
+        </details>
+        <details>
+          <summary>¿Puedo cancelar cuando quiera?</summary>
+          <p>Sí, puedes cancelar la suscripción en cualquier momento. Tu acceso Premium continuará hasta terminar el ciclo.</p>
+        </details>
+        <details>
+          <summary>¿Cómo pago?</summary>
+          <p>Stripe (tarjeta) y, si lo prefieres, PayPal. El cobro es en MXN y es seguro.</p>
+        </details>
+        <details>
+          <summary>¿Necesito crear una cuenta?</summary>
+          <p>No. Tras pagar, la app activa tu acceso Premium y te da tu PDF de regalo. Listo.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-cta" id="sticky">
+    <span style="font-weight:700">Desbloquea todo con Premium</span>
+    <a class="btn btn-primary" href="https://bill-ai-javt2bill.streamlit.app/?checkout=1" target="_blank" rel="nofollow noopener">Hacerme Premium</a>
+    <a class="btn btn-outline" href="https://bill-ai-javt2bill.streamlit.app" target="_blank" rel="nofollow noopener">Probar gratis</a>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div style="font-size:12px;line-height:1.6">
+        © <span id="year"></span> Bill Responde. Proyecto educativo independiente para hispanohablantes. No pertenece ni representa oficialmente a ninguna entidad de AA. 
+        Información general y educativa: no es terapia ni consejo médico.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Precio estimado (si quieres mostrar el precio sin depender del backend)
+    // Reemplaza "—" por tu precio mensual en MXN, o elimina esta línea.
+    document.getElementById('precio').textContent = '99'; // <-- EDITA AQUÍ si lo deseas
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reducir la barra sticky al llegar al hero top
+    const sticky = document.getElementById('sticky');
+    const topCta = document.getElementById('cta-top');
+    let shown = true;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y < 80 && shown){ sticky.style.transform = 'translateY(120%)'; sticky.style.opacity = '.0'; shown=false; }
+      else if (y >= 80 && !shown){ sticky.style.transform = 'translateY(0)'; sticky.style.opacity = '1'; shown=true; }
+    };
+    sticky.style.transition = 'transform .25s ease, opacity .25s ease';
+    sticky.style.transform = 'translateY(120%)'; sticky.style.opacity = '.0'; shown=false;
+    window.addEventListener('scroll', onScroll, {passive:true});
+  </script>
+</body>
+</html>
